@@ -24,9 +24,10 @@ function resolveToParent(nodeId, nodes) {
   return node.parentId ? node.parentId : nodeId;
 }
 
-// Returns true if the node is a parent/group (has children or is type 'group').
+// Returns true if the node is a parent/group (type 'group', or has children).
 function isParentNode(nodeId, nodes) {
-  return nodes.some((n) => n.parentId === nodeId);
+  const node = nodes.find((n) => n.id === nodeId);
+  return (node?.type === 'group') || nodes.some((n) => n.parentId === nodeId);
 }
 
 function Flow() {
