@@ -3,6 +3,7 @@ export const initialNodes = [
     id: 'A',
     type: 'groupNode',
     position: { x: 0, y: 0 },
+    dragHandle: '.group-node-header',
     data: { label: 'A' },
     style: {
       width: 170,
@@ -27,6 +28,7 @@ export const initialNodes = [
     id: 'B',
     type: 'groupNode',
     position: { x: -100, y: 200 },
+    dragHandle: '.group-node-header',
     data: { label: 'B' },
     style: {
       width: 170,
@@ -67,6 +69,7 @@ export const initialNodes = [
     id: 'C',
     type: 'groupNode',
     position: { x: 100, y: 200 },
+    dragHandle: '.group-node-header',
     data: { label: 'C' },
     style: {
       width: 170,
