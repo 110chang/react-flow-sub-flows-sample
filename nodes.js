@@ -1,8 +1,8 @@
 export const initialNodes = [
   {
     id: 'A',
-    type: 'group',
     position: { x: 0, y: 0 },
+    data: { label: 'A' },
     style: {
       width: 170,
       height: 140,
@@ -10,7 +10,6 @@ export const initialNodes = [
   },
   {
     id: 'A-1',
-    type: 'input',
     data: { label: 'Child Node 1' },
     position: { x: 10, y: 10 },
     parentId: 'A',
@@ -25,13 +24,11 @@ export const initialNodes = [
   },
   {
     id: 'B',
-    type: 'output',
     position: { x: -100, y: 200 },
     data: null,
     style: {
       width: 170,
-      height: 140,
-      backgroundColor: 'rgba(240,240,240,0.25)',
+      height: 160,
     },
   },
   {
@@ -40,7 +37,6 @@ export const initialNodes = [
     position: { x: 50, y: 10 },
     parentId: 'B',
     extent: 'parent',
-    draggable: false,
     style: {
       width: 60,
     },
@@ -51,7 +47,6 @@ export const initialNodes = [
     position: { x: 10, y: 90 },
     parentId: 'B',
     extent: 'parent',
-    draggable: false,
     style: {
       width: 60,
     },
@@ -62,15 +57,24 @@ export const initialNodes = [
     position: { x: 100, y: 90 },
     parentId: 'B',
     extent: 'parent',
-    draggable: false,
     style: {
       width: 60,
     },
   },
   {
     id: 'C',
-    type: 'output',
     position: { x: 100, y: 200 },
-    data: { label: 'Node C' },
+    data: { label: 'C' },
+    style: {
+      width: 170,
+      height: 100,
+    },
+  },
+  {
+    id: 'C-1',
+    data: { label: 'Child Node 1' },
+    position: { x: 10, y: 10 },
+    parentId: 'C',
+    extent: 'parent',
   },
 ];
