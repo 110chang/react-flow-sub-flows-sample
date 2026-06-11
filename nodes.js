@@ -67,10 +67,23 @@ export const initialNodes = [
       width: 60,
     },
   },
+  // C was a standalone leaf node connected via a child (A-2 → C).
+  // Rule: child→standalone → resolve child to its parent, wrap standalone in a new group.
+  {
+    id: 'C-group',
+    type: 'group',
+    position: { x: 100, y: 200 },
+    style: {
+      width: 170,
+      height: 80,
+    },
+  },
   {
     id: 'C',
     type: 'output',
-    position: { x: 100, y: 200 },
     data: { label: 'Node C' },
+    position: { x: 10, y: 22 },
+    parentId: 'C-group',
+    extent: 'parent',
   },
 ];
