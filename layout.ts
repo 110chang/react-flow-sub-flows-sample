@@ -4,17 +4,29 @@ import type { Node, Edge } from '@xyflow/react';
 const PADDING = 20;
 const DEFAULT_NODE_WIDTH = 150;
 const DEFAULT_NODE_HEIGHT = 36;
+const HEADER_HEIGHT = 32;
 
 export function getLayoutedNodes(nodes: Node[], edges: Edge[]): Node[] {
   const groupNodes = nodes.filter((n) => !n.parentId);
   const childNodes = nodes.filter((n) => n.parentId);
 
   const updatedChildren: Node[] = [];
+  const skippedChildren: Node[] = [];
   const groupSizes = new Map<string, { width: number; height: number }>();
 
   // Step 1: layout children within each group
   for (const group of groupNodes) {
+    const isCollapsed = (group.data as any)?.collapsed === true;
     const children = childNodes.filter((n) => n.parentId === group.id);
+
+    if (isCollapsed) {
+      groupSizes.set(group.id, {
+        width: (group.data as any).expandedWidth ?? (group.style?.width as number) ?? DEFAULT_NODE_WIDTH,
+        height: HEADER_HEIGHT,
+      });
+      skippedChildren.push(...children);
+      continue;
+    }
 
     if (children.length === 0) {
       groupSizes.set(group.id, {
@@ -98,19 +110,21 @@ export function getLayoutedNodes(nodes: Node[], edges: Edge[]): Node[] {
   const updatedGroups = groupNodes.map((group) => {
     const { x, y } = topGraph.node(group.id);
     const size = groupSizes.get(group.id)!;
+    const isCollapsed = (group.data as any)?.collapsed === true;
     return {
       ...group,
       position: {
         x: x - size.width / 2,
-        y: y - size.height / 2,
+        // Align dagre center with the visual center of the header when collapsed
+        y: isCollapsed ? y + size.height / 2 : y - size.height / 2,
       },
       style: {
         ...group.style,
         width: size.width,
-        height: size.height,
+        height: isCollapsed ? 0 : size.height,
       },
     };
   });
 
-  return [...updatedGroups, ...updatedChildren];
+  return [...updatedGroups, ...updatedChildren, ...skippedChildren];
 }

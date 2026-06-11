@@ -23,3 +23,24 @@
   font-weight: 600;
   user-select: none;
 }
+
+.group-node-toggle {
+  position: absolute;
+  left: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 10px;
+  padding: 0;
+  line-height: 1;
+  color: inherit;
+}
+
+.group-node[data-collapsed='true'] {
+  border: none;
+  background: transparent;
+}
+
+.group-node[data-collapsed='true'] .group-node-header {
+  border-radius: 4px;
+}
