@@ -5,12 +5,14 @@ import {
   applyEdgeChanges,
   applyNodeChanges,
   Background,
+  Panel,
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 
 import { initialNodes } from './nodes';
 import { initialEdges } from './edges';
 import GroupNode from './GroupNode';
+import { getLayoutedNodes } from './layout';
 
 const nodeTypes = { groupNode: GroupNode };
 
@@ -35,6 +37,10 @@ function Flow() {
     [setEdges],
   );
 
+  const onLayout = useCallback(() => {
+    setNodes((nds) => getLayoutedNodes(nds, edges));
+  }, [edges]);
+
   return (
     <ReactFlow
       nodes={nodes}
@@ -48,6 +54,9 @@ function Flow() {
       attributionPosition="top-right"
     >
       <Background />
+      <Panel position="top-left">
+        <button onClick={onLayout}>Re-layout</button>
+      </Panel>
     </ReactFlow>
   );
 }
