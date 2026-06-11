@@ -4,17 +4,29 @@ import type { Node, Edge } from '@xyflow/react';
 const PADDING = 20;
 const DEFAULT_NODE_WIDTH = 150;
 const DEFAULT_NODE_HEIGHT = 36;
+const HEADER_HEIGHT = 32;
 
 export function getLayoutedNodes(nodes: Node[], edges: Edge[]): Node[] {
   const groupNodes = nodes.filter((n) => !n.parentId);
   const childNodes = nodes.filter((n) => n.parentId);
 
   const updatedChildren: Node[] = [];
+  const skippedChildren: Node[] = [];
   const groupSizes = new Map<string, { width: number; height: number }>();
 
   // Step 1: layout children within each group
   for (const group of groupNodes) {
+    const isCollapsed = (group.data as any)?.collapsed === true;
     const children = childNodes.filter((n) => n.parentId === group.id);
+
+    if (isCollapsed) {
+      groupSizes.set(group.id, {
+        width: (group.data as any).expandedWidth ?? (group.style?.width as number) ?? DEFAULT_NODE_WIDTH,
+        height: HEADER_HEIGHT,
+      });
+      skippedChildren.push(...children);
+      continue;
+    }
 
     if (children.length === 0) {
       groupSizes.set(group.id, {
@@ -64,14 +76,14 @@ export function getLayoutedNodes(nodes: Node[], edges: Edge[]): Node[] {
         ...child,
         position: {
           x: x - w / 2 - minX + PADDING,
-          y: y - h / 2 - minY + PADDING,
+          y: y - h / 2 - minY + PADDING + HEADER_HEIGHT,
         },
       });
     }
 
     groupSizes.set(group.id, {
       width: maxX - minX + 2 * PADDING,
-      height: maxY - minY + 2 * PADDING,
+      height: maxY - minY + 2 * PADDING + HEADER_HEIGHT,
     });
   }
 
@@ -112,5 +124,5 @@ export function getLayoutedNodes(nodes: Node[], edges: Edge[]): Node[] {
     };
   });
 
-  return [...updatedGroups, ...updatedChildren];
+  return [...updatedGroups, ...updatedChildren, ...skippedChildren];
 }
