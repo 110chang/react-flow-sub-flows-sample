@@ -22,7 +22,7 @@ function GroupNode({ id, data }: NodeProps) {
         data: { ...node.data, collapsed: !collapsed },
         style: {
           ...node.style,
-          height: collapsed ? expandedHeight : 0,
+          height: collapsed ? expandedHeight : HEADER_HEIGHT,
         },
       }));
     },
@@ -31,11 +31,7 @@ function GroupNode({ id, data }: NodeProps) {
 
   return (
     <div className="group-node" data-collapsed={String(collapsed)}>
-      <Handle
-        type="target"
-        position={Position.Top}
-        style={{ top: -HEADER_HEIGHT }}
-      />
+      <Handle type="target" position={Position.Top} />
       <div className="group-node-header">
         <button className="group-node-toggle" onClick={onToggle}>
           {collapsed ? '▶' : '▼'}

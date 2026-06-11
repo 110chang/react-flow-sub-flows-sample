@@ -7,20 +7,20 @@ export const initialNodes = [
     data: { label: 'A' },
     style: {
       width: 170,
-      height: 140,
+      height: 172,
     },
   },
   {
     id: 'A-1',
     data: { label: 'Child Node 1' },
-    position: { x: 10, y: 10 },
+    position: { x: 10, y: 42 },
     parentId: 'A',
     extent: 'parent',
   },
   {
     id: 'A-2',
     data: { label: 'Child Node 2' },
-    position: { x: 10, y: 90 },
+    position: { x: 10, y: 122 },
     parentId: 'A',
     extent: 'parent',
   },
@@ -32,13 +32,13 @@ export const initialNodes = [
     data: { label: 'B' },
     style: {
       width: 170,
-      height: 160,
+      height: 192,
     },
   },
   {
     id: 'B-1',
     data: { label: 'Child 1' },
-    position: { x: 50, y: 10 },
+    position: { x: 50, y: 42 },
     parentId: 'B',
     extent: 'parent',
     style: {
@@ -48,7 +48,7 @@ export const initialNodes = [
   {
     id: 'B-2',
     data: { label: 'Child 2' },
-    position: { x: 10, y: 90 },
+    position: { x: 10, y: 122 },
     parentId: 'B',
     extent: 'parent',
     style: {
@@ -58,7 +58,7 @@ export const initialNodes = [
   {
     id: 'B-3',
     data: { label: 'Child 3' },
-    position: { x: 100, y: 90 },
+    position: { x: 100, y: 122 },
     parentId: 'B',
     extent: 'parent',
     style: {
@@ -73,13 +73,13 @@ export const initialNodes = [
     data: { label: 'C' },
     style: {
       width: 170,
-      height: 100,
+      height: 132,
     },
   },
   {
     id: 'C-1',
     data: { label: 'Child Node 1' },
-    position: { x: 10, y: 10 },
+    position: { x: 10, y: 42 },
     parentId: 'C',
     extent: 'parent',
   },

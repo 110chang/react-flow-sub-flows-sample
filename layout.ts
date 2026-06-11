@@ -76,14 +76,14 @@ export function getLayoutedNodes(nodes: Node[], edges: Edge[]): Node[] {
         ...child,
         position: {
           x: x - w / 2 - minX + PADDING,
-          y: y - h / 2 - minY + PADDING,
+          y: y - h / 2 - minY + PADDING + HEADER_HEIGHT,
         },
       });
     }
 
     groupSizes.set(group.id, {
       width: maxX - minX + 2 * PADDING,
-      height: maxY - minY + 2 * PADDING,
+      height: maxY - minY + 2 * PADDING + HEADER_HEIGHT,
     });
   }
 
@@ -110,18 +110,16 @@ export function getLayoutedNodes(nodes: Node[], edges: Edge[]): Node[] {
   const updatedGroups = groupNodes.map((group) => {
     const { x, y } = topGraph.node(group.id);
     const size = groupSizes.get(group.id)!;
-    const isCollapsed = (group.data as any)?.collapsed === true;
     return {
       ...group,
       position: {
         x: x - size.width / 2,
-        // Align dagre center with the visual center of the header when collapsed
-        y: isCollapsed ? y + size.height / 2 : y - size.height / 2,
+        y: y - size.height / 2,
       },
       style: {
         ...group.style,
         width: size.width,
-        height: isCollapsed ? 0 : size.height,
+        height: size.height,
       },
     };
   });

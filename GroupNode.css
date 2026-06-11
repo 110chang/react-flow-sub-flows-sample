@@ -4,24 +4,21 @@
   height: 100%;
   background-color: rgba(255, 255, 255, 0.8);
   border: 1px solid #888;
-  border-radius: 0 0 4px 4px;
+  border-radius: 4px;
+  overflow: hidden;
 }
 
 .group-node-header {
-  position: absolute;
-  left: -1px;
-  right: -1px;
-  top: -32px;
   height: 32px;
   background-color: #fff;
-  border: 1px solid #888;
-  border-radius: 4px 4px 0 0;
+  border-bottom: 1px solid #888;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 12px;
   font-weight: 600;
   user-select: none;
+  position: relative;
 }
 
 .group-node-toggle {
@@ -36,11 +33,6 @@
   color: inherit;
 }
 
-.group-node[data-collapsed='true'] {
-  border: none;
-  background: transparent;
-}
-
 .group-node[data-collapsed='true'] .group-node-header {
-  border-radius: 4px;
+  border-bottom: none;
 }
