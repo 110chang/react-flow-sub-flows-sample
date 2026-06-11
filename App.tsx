@@ -10,6 +10,9 @@ import '@xyflow/react/dist/style.css';
 
 import { initialNodes } from './nodes';
 import { initialEdges } from './edges';
+import GroupNode from './GroupNode';
+
+const nodeTypes = { groupNode: GroupNode };
 
 const rfStyle = {
   backgroundColor: '#D0C0F7',
@@ -39,6 +42,7 @@ function Flow() {
       onNodesChange={onNodesChange}
       onEdgesChange={onEdgesChange}
       onConnect={onConnect}
+      nodeTypes={nodeTypes}
       fitView
       style={rfStyle}
       attributionPosition="top-right"

@@ -1,6 +1,7 @@
 export const initialNodes = [
   {
     id: 'A',
+    type: 'groupNode',
     position: { x: 0, y: 0 },
     data: { label: 'A' },
     style: {
@@ -24,8 +25,9 @@ export const initialNodes = [
   },
   {
     id: 'B',
+    type: 'groupNode',
     position: { x: -100, y: 200 },
-    data: null,
+    data: { label: 'B' },
     style: {
       width: 170,
       height: 160,
@@ -63,6 +65,7 @@ export const initialNodes = [
   },
   {
     id: 'C',
+    type: 'groupNode',
     position: { x: 100, y: 200 },
     data: { label: 'C' },
     style: {
